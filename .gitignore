@@ -1,0 +1,3 @@
+# Ignore the mysql directory
+/mysql/
+.env
