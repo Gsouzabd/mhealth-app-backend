@@ -1,0 +1,3833 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MLOVI - Multidisciplinar: BACKEND API V1",
+        "description": "Description of your API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api",
+            "description": "Main (production) server"
+        }
+    ],
+    "paths": {
+        "/helpers/tiss/": {
+            "get": {
+                "tags": [
+                    "HelpersTiss"
+                ],
+                "summary": "Listar informações de todas as tabelas TISS combinadas",
+                "description": "Retorna uma lista combinada de informações de todas as tabelas TISS, incluindo UF, tabelas, tipos de consulta, regimes de atendimento, coberturas especiais e indicações de acidente.",
+                "operationId": "getAllHelpersTiss",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "uf": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "codigo_uf": {
+                                                        "type": "string",
+                                                        "example": "11"
+                                                    },
+                                                    "uf": {
+                                                        "type": "string",
+                                                        "example": "Rondônia"
+                                                    },
+                                                    "unidade_federacao": {
+                                                        "type": "string",
+                                                        "example": "RO"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "tabela": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "codigo": {
+                                                        "type": "string",
+                                                        "example": "00"
+                                                    },
+                                                    "titulo": {
+                                                        "type": "string",
+                                                        "example": "Tabela própria das operadoras"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "tipo_consulta": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "codigo": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "titulo": {
+                                                        "type": "string",
+                                                        "example": "Primeira Consulta"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "regime_atendimento": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "codigo": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "titulo": {
+                                                        "type": "string",
+                                                        "example": "Ambulatorial"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "cobertura_especial": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "codigo": {
+                                                        "type": "string",
+                                                        "example": "01"
+                                                    },
+                                                    "titulo": {
+                                                        "type": "string",
+                                                        "example": "Gestante"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "indicacao_acidente": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "codigo": {
+                                                        "type": "string",
+                                                        "example": "0"
+                                                    },
+                                                    "titulo": {
+                                                        "type": "string",
+                                                        "example": "Trabalho"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/administradores": {
+            "get": {
+                "tags": [
+                    "Administradores"
+                ],
+                "summary": "Listar todos os administradores",
+                "operationId": "getAdministradorList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Administradores"
+                ],
+                "summary": "Cadastrar um novo administrador",
+                "description": "Cria um novo registro de administrador com os dados fornecidos.",
+                "operationId": "storeAdministrador",
+                "requestBody": {
+                    "description": "Dados do administrador",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "cpf",
+                                    "email",
+                                    "password",
+                                    "data_nascimento",
+                                    "sexo"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "João da Silva"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "123.456.789-11"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "joao123@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "senha@123"
+                                    },
+                                    "data_nascimento": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-01-01"
+                                    },
+                                    "sexo": {
+                                        "type": "string",
+                                        "example": "M"
+                                    },
+                                    "foto": {
+                                        "type": "string",
+                                        "example": "arquivo.jpg",
+                                        "nullable": true
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "00000-000",
+                                        "nullable": true
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Rua Exemplo",
+                                        "nullable": true
+                                    },
+                                    "numero": {
+                                        "type": "string",
+                                        "example": "123",
+                                        "nullable": true
+                                    },
+                                    "complemento": {
+                                        "type": "string",
+                                        "example": "Apto 101",
+                                        "nullable": true
+                                    },
+                                    "bairro": {
+                                        "type": "string",
+                                        "example": "Centro",
+                                        "nullable": true
+                                    },
+                                    "cidade": {
+                                        "type": "string",
+                                        "example": "Cidade Exemplo",
+                                        "nullable": true
+                                    },
+                                    "estado": {
+                                        "type": "string",
+                                        "example": "Estado Exemplo",
+                                        "nullable": true
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "(00) 0000-0000",
+                                        "nullable": true
+                                    },
+                                    "celular": {
+                                        "type": "string",
+                                        "example": "(00) 90000-0000",
+                                        "nullable": true
+                                    },
+                                    "pais": {
+                                        "type": "string",
+                                        "example": "Brasil",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Administrador criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/administradores/{id}": {
+            "get": {
+                "tags": [
+                    "Administradores"
+                ],
+                "summary": "Buscar administrador por ID",
+                "operationId": "getAdministradorById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do administrador",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Administrador não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Administradores"
+                ],
+                "summary": "Atualizar administrador",
+                "operationId": "updateAdministrador",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do administrador",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do administrador a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "José Silva"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Administrador não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Administradores"
+                ],
+                "summary": "Excluir administrador",
+                "operationId": "deleteAdministrador",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do administrador",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Administrador excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Administrador não encontrado"
+                    }
+                }
+            }
+        },
+        "/atendimentos": {
+            "get": {
+                "tags": [
+                    "Atendimentos"
+                ],
+                "summary": "Listar todas as marcações",
+                "operationId": "getAtendimentoList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            }
+        },
+        "/atendimentos/{id}": {
+            "get": {
+                "tags": [
+                    "Atendimentos"
+                ],
+                "summary": "Buscar atendimento por ID",
+                "operationId": "getAtendimentoById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da atendimento",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Marcação não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Atendimentos"
+                ],
+                "summary": "Atualizar atendimento",
+                "operationId": "updateAtendimento",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da atendimento",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do atendimento a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": "em andamento"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Marcação não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Atendimentos"
+                ],
+                "summary": "Excluir atendimento",
+                "operationId": "deleteAtendimento",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da atendimento",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Marcação excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Marcação não encontrado"
+                    }
+                }
+            }
+        },
+        "/convenios": {
+            "get": {
+                "tags": [
+                    "Convênios"
+                ],
+                "summary": "Listar todos os convenios",
+                "operationId": "getConvenioList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Convênios"
+                ],
+                "summary": "Cadastrar um novo convenio",
+                "description": "Cria um novo registro de convenio com os dados fornecidos.",
+                "operationId": "storeConvenio",
+                "requestBody": {
+                    "description": "Dados do convenio",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Nome do Convenio"
+                                    },
+                                    "diasCarencia": {
+                                        "type": "integer",
+                                        "example": 30
+                                    },
+                                    "geraReceitas": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "numeroderegistro": {
+                                        "type": "string",
+                                        "example": "xxxxxx"
+                                    },
+                                    "codigonaoperadora": {
+                                        "type": "string",
+                                        "example": null
+                                    },
+                                    "versaoxml": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "tabela": {
+                                        "type": "string",
+                                        "example": "00"
+                                    },
+                                    "maxSessoesTiss": {
+                                        "type": "integer",
+                                        "example": 100
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Convenio criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/convenios/{id}": {
+            "get": {
+                "tags": [
+                    "Convênios"
+                ],
+                "summary": "Buscar convenio por ID",
+                "operationId": "getConvenioById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do convenio",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Convenio não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Convênios"
+                ],
+                "summary": "Atualizar convenio",
+                "operationId": "updateConvenio",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do convenio",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do convenio a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Amil"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Convenio não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Convênios"
+                ],
+                "summary": "Excluir convenio",
+                "operationId": "deleteConvenio",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do convenio",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Convenio excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Convenio não encontrado"
+                    }
+                }
+            }
+        },
+        "/especialidades": {
+            "get": {
+                "tags": [
+                    "Especialidades"
+                ],
+                "summary": "Listar todos os especialidades",
+                "operationId": "getEspecialidadeList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Especialidades"
+                ],
+                "summary": "Cadastrar um novo especialidade",
+                "description": "Cria um novo registro de especialidade com os dados fornecidos.",
+                "operationId": "storeEspecialidade",
+                "requestBody": {
+                    "description": "Dados do especialidade",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "cbos"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Psicologia"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Descrição da especialidade"
+                                    },
+                                    "cbos": {
+                                        "type": "string",
+                                        "example": "2515-10"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Especialidade criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/especialidades/{id}": {
+            "get": {
+                "tags": [
+                    "Especialidades"
+                ],
+                "summary": "Buscar especialidade por ID",
+                "operationId": "getEspecialidadeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do especialidade",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Especialidade não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Especialidades"
+                ],
+                "summary": "Atualizar especialidade",
+                "operationId": "updateEspecialidade",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do especialidade",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do especialidade a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Psicologia"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Especialidade não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Especialidades"
+                ],
+                "summary": "Excluir especialidade",
+                "operationId": "deleteEspecialidade",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do especialidade",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Especialidade excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Especialidade não encontrado"
+                    }
+                }
+            }
+        },
+        "/funcionarios": {
+            "get": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Listar todos os funcionarios",
+                "operationId": "getFuncionarioList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Cadastrar um novo funcionario",
+                "description": "Cria um novo registro de funcionario com os dados fornecidos.",
+                "operationId": "storeFuncionario",
+                "requestBody": {
+                    "description": "Dados do funcionario",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "cpf",
+                                    "email",
+                                    "password",
+                                    "data_nascimento",
+                                    "sexo",
+                                    "administrativo",
+                                    "especialista"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "João da Silva"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "123.456.789-11"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "joao123@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "senha@123"
+                                    },
+                                    "data_nascimento": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-01-01"
+                                    },
+                                    "sexo": {
+                                        "type": "string",
+                                        "example": "M"
+                                    },
+                                    "foto": {
+                                        "type": "string",
+                                        "example": "arquivo.jpg",
+                                        "nullable": true
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "00000-000",
+                                        "nullable": true
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Rua Exemplo",
+                                        "nullable": true
+                                    },
+                                    "numero": {
+                                        "type": "string",
+                                        "example": "123",
+                                        "nullable": true
+                                    },
+                                    "complemento": {
+                                        "type": "string",
+                                        "example": "Apto 101",
+                                        "nullable": true
+                                    },
+                                    "bairro": {
+                                        "type": "string",
+                                        "example": "Centro",
+                                        "nullable": true
+                                    },
+                                    "cidade": {
+                                        "type": "string",
+                                        "example": "Cidade Exemplo",
+                                        "nullable": true
+                                    },
+                                    "estado": {
+                                        "type": "string",
+                                        "example": "Estado Exemplo",
+                                        "nullable": true
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "(00) 0000-0000",
+                                        "nullable": true
+                                    },
+                                    "celular": {
+                                        "type": "string",
+                                        "example": "(00) 90000-0000",
+                                        "nullable": true
+                                    },
+                                    "pais": {
+                                        "type": "string",
+                                        "example": "Brasil",
+                                        "nullable": true
+                                    },
+                                    "data_criacao": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-03-11 12:34:56"
+                                    },
+                                    "area": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "administrativo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "especialista": {
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "especialidade": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "calendario_id": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    },
+                                    "conselho": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    },
+                                    "numConselho": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "ufConselho": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "dataUltimoAcesso": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "nullable": true
+                                    },
+                                    "system": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "deviceToken": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "data_contratacao": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "nullable": true
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Funcionario criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/funcionarios/{id}": {
+            "get": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Buscar funcionario por ID",
+                "operationId": "getFuncionarioById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do funcionario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Funcionario não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Atualizar funcionario",
+                "operationId": "updateFuncionario",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do funcionario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do funcionario a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "José Silva"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Funcionario não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Funcionários"
+                ],
+                "summary": "Excluir funcionario",
+                "operationId": "deleteFuncionario",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do funcionario",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Funcionario excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Funcionario não encontrado"
+                    }
+                }
+            }
+        },
+        "/guias": {
+            "get": {
+                "tags": [
+                    "Guias"
+                ],
+                "summary": "Listar todos as guias",
+                "operationId": "getGuiaList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Guias"
+                ],
+                "summary": "Cadastrar uma nova guia",
+                "description": "Cria um novo registro de guia com os dados fornecidos.",
+                "operationId": "storeGuia",
+                "requestBody": {
+                    "description": "Dados da guia",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "lote_numero",
+                                    "id_convenio",
+                                    "id_paciente",
+                                    "id_procedimento",
+                                    "status",
+                                    "data",
+                                    "quantidade",
+                                    "valor",
+                                    "id_contratado_executante",
+                                    "id_profissional_executante"
+                                ],
+                                "properties": {
+                                    "lote_numero": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "id_convenio": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "id_paciente": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "id_procedimento": {
+                                        "type": "intenger",
+                                        "example": "14"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": 0
+                                    },
+                                    "num_guia_prestador": {
+                                        "type": "string",
+                                        "example": "GP001"
+                                    },
+                                    "num_guia_operadora": {
+                                        "type": "string",
+                                        "example": "GO001"
+                                    },
+                                    "data": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-03-29"
+                                    },
+                                    "quantidade": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "valor": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100
+                                    },
+                                    "tabela": {
+                                        "type": "string",
+                                        "example": "00"
+                                    },
+                                    "id_contratado_executante": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "codigo_operadora_contratado": {
+                                        "type": "string",
+                                        "example": "COD001"
+                                    },
+                                    "cnpj_contratado": {
+                                        "type": "string",
+                                        "example": "12345678901234"
+                                    },
+                                    "cnes_contratado": {
+                                        "type": "string",
+                                        "example": "CNES001"
+                                    },
+                                    "id_profissional_executante": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "codigo_operadora_profissional": {
+                                        "type": "string",
+                                        "example": "COD002"
+                                    },
+                                    "id_conselho": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "numero_conselho_profissional": {
+                                        "type": "string",
+                                        "example": "08"
+                                    },
+                                    "uf_conselho_profissional": {
+                                        "type": "string",
+                                        "example": 26
+                                    },
+                                    "cbo_s": {
+                                        "type": "string",
+                                        "example": "251510"
+                                    },
+                                    "tipo_consulta": {
+                                        "type": "string",
+                                        "example": "4"
+                                    },
+                                    "indicador_acidente": {
+                                        "type": "string",
+                                        "example": "9"
+                                    },
+                                    "cobertura_especial": {
+                                        "type": "string",
+                                        "example": "02"
+                                    },
+                                    "atendimento_regime": {
+                                        "type": "string",
+                                        "example": "01"
+                                    },
+                                    "observacao": {
+                                        "type": "string",
+                                        "example": "Observações adicionais"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Guia criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/guias/{id}": {
+            "get": {
+                "tags": [
+                    "Guias"
+                ],
+                "summary": "Buscar guia por ID",
+                "operationId": "getGuiaById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do guia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Guia não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Guias"
+                ],
+                "summary": "Atualizar guia",
+                "operationId": "updateGuia",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do guia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do guia a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Guia Ilha do leite"
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Av. Frei Matias Teves, 280 - Ilha do Leite, Recife - PE, 50070-465"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Guia não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Guias"
+                ],
+                "summary": "Excluir guia",
+                "operationId": "deleteGuia",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do guia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Guia excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Guia não encontrado"
+                    }
+                }
+            }
+        },
+        "/lotes": {
+            "get": {
+                "tags": [
+                    "Lotes"
+                ],
+                "summary": "Listar todos as lotes",
+                "operationId": "getLoteList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Lotes"
+                ],
+                "summary": "Cadastrar uma nova lote",
+                "description": "Cria um novo registro de lote com os dados fornecidos.",
+                "operationId": "storeLote",
+                "requestBody": {
+                    "description": "Dados da lote",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_convenio",
+                                    "numero",
+                                    "tipo",
+                                    "data",
+                                    "status",
+                                    "valor_total"
+                                ],
+                                "properties": {
+                                    "id_convenio": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "numero": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "tipo": {
+                                        "type": "string",
+                                        "example": "Consulta"
+                                    },
+                                    "data": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-06-30"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "0"
+                                    },
+                                    "valor_total": {
+                                        "type": "number",
+                                        "format": "decimal",
+                                        "example": 100
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lote criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/lotes/{id}": {
+            "get": {
+                "tags": [
+                    "Lotes"
+                ],
+                "summary": "Buscar lote por ID",
+                "operationId": "getLoteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do lote",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Lote não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Lotes"
+                ],
+                "summary": "Atualizar lote",
+                "operationId": "updateLote",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do lote",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do lote a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Lote Ilha do leite"
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Av. Frei Matias Teves, 280 - Ilha do Leite, Recife - PE, 50070-465"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Lote não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Lotes"
+                ],
+                "summary": "Excluir lote",
+                "operationId": "deleteLote",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do lote",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Lote excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Lote não encontrado"
+                    }
+                }
+            }
+        },
+        "/lotes/{idConvenio}/{numeroLote}/xml": {
+            "get": {
+                "tags": [
+                    "Lotes"
+                ],
+                "summary": "Gerar XML do lote de um convênio",
+                "operationId": "generateXML",
+                "parameters": [
+                    {
+                        "name": "idConvenio",
+                        "in": "path",
+                        "description": "ID do Convênio",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "numeroLote",
+                        "in": "path",
+                        "description": "Número do lote atrelado ao convênio",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Lote não encontrado"
+                    }
+                }
+            }
+        },
+        "/marcacoes": {
+            "get": {
+                "tags": [
+                    "Marcações"
+                ],
+                "summary": "Listar todas as marcações",
+                "operationId": "getMarcacaoList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Marcações"
+                ],
+                "summary": "Cadastrar uma nova marcação",
+                "description": "Cria um novo registro de marcação com os dados fornecidos.",
+                "operationId": "storeMarcacao",
+                "requestBody": {
+                    "description": "Dados do marcacao",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id_paciente",
+                                    "id_funcionario",
+                                    "id_especialidade",
+                                    "convenio",
+                                    "duracao",
+                                    "horario",
+                                    "data_inicial",
+                                    "recorrencia",
+                                    "marcadoPor",
+                                    "unidade"
+                                ],
+                                "properties": {
+                                    "id_paciente": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "id_funcionario": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "id_especialidade": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "convenio": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "duracao": {
+                                        "type": "integer",
+                                        "example": 60
+                                    },
+                                    "horario": {
+                                        "type": "string",
+                                        "format": "hour",
+                                        "example": "14:00:00"
+                                    },
+                                    "data_inicial": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-03-18"
+                                    },
+                                    "recorrencia": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "tipoRecorrencia": {
+                                        "type": "string",
+                                        "enum": [
+                                            "s = semanal",
+                                            "q = quinzenal",
+                                            "m = mensal"
+                                        ],
+                                        "example": "semanal"
+                                    },
+                                    "vezesRecorrencia": {
+                                        "type": "integer",
+                                        "example": 4
+                                    },
+                                    "marcadoPor": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "unidade": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Marcacao criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/marcacoes/{id}": {
+            "get": {
+                "tags": [
+                    "Marcações"
+                ],
+                "summary": "Buscar marcação por ID",
+                "operationId": "getMarcacaoById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da marcação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Marcação não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Marcações"
+                ],
+                "summary": "Atualizar marcação",
+                "operationId": "updateMarcacao",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da marcação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do marcacao a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "duraca": {
+                                        "type": "integer",
+                                        "example": "30"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Marcação não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Marcações"
+                ],
+                "summary": "Excluir marcação",
+                "operationId": "deleteMarcacao",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da marcação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Marcação excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Marcação não encontrado"
+                    }
+                }
+            }
+        },
+        "/marcacoes/{idMarcacao}/atendimentos": {
+            "get": {
+                "tags": [
+                    "Marcações",
+                    "Atendimentos"
+                ],
+                "summary": "Buscar atendimentos por marcação",
+                "operationId": "getMarcacaoAtendimentos",
+                "parameters": [
+                    {
+                        "name": "idMarcacao",
+                        "in": "path",
+                        "description": "ID da marcação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Paciente não encontrado"
+                    }
+                }
+            }
+        },
+        "/marcacoes/{idMarcacao}/atendimentos/{idAtendimento}": {
+            "get": {
+                "tags": [
+                    "Marcações",
+                    "Atendimentos"
+                ],
+                "summary": "Buscar atendimento by id por marcação",
+                "operationId": "getMarcacaoAtendimentoById",
+                "parameters": [
+                    {
+                        "name": "idMarcacao",
+                        "in": "path",
+                        "description": "ID da marcação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idAtendimento",
+                        "in": "path",
+                        "description": "ID do atendimento",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Paciente não encontrado"
+                    }
+                }
+            }
+        },
+        "/pacientes": {
+            "get": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Listar todos os pacientes",
+                "operationId": "getPacientesList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Cadastrar um novo paciente",
+                "description": "Cria um novo registro de paciente com os dados fornecidos.",
+                "operationId": "storePaciente",
+                "requestBody": {
+                    "description": "Dados do paciente",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "cpf",
+                                    "email",
+                                    "data_nascimento",
+                                    "sexo",
+                                    "responsaveis"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "José Silva"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "000.000.000-00"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "jose.silva@example.com",
+                                        "nullable": true
+                                    },
+                                    "data_nascimento": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-01-01"
+                                    },
+                                    "sexo": {
+                                        "type": "string",
+                                        "example": "M"
+                                    },
+                                    "foto": {
+                                        "type": "string",
+                                        "example": "arquivo.jpg",
+                                        "nullable": true
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "00000-000",
+                                        "nullable": true
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Rua Exemplo",
+                                        "nullable": true
+                                    },
+                                    "numero": {
+                                        "type": "string",
+                                        "example": "123",
+                                        "nullable": true
+                                    },
+                                    "complemento": {
+                                        "type": "string",
+                                        "example": "Apto 101",
+                                        "nullable": true
+                                    },
+                                    "bairro": {
+                                        "type": "string",
+                                        "example": "Centro",
+                                        "nullable": true
+                                    },
+                                    "cidade": {
+                                        "type": "string",
+                                        "example": "Cidade Exemplo",
+                                        "nullable": true
+                                    },
+                                    "estado": {
+                                        "type": "string",
+                                        "example": "Estado Exemplo",
+                                        "nullable": true
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "(00) 0000-0000",
+                                        "nullable": true
+                                    },
+                                    "celular": {
+                                        "type": "string",
+                                        "example": "(00) 90000-0000",
+                                        "nullable": true
+                                    },
+                                    "pais": {
+                                        "type": "string",
+                                        "example": "Brasil",
+                                        "nullable": true
+                                    },
+                                    "cns": {
+                                        "type": "string",
+                                        "example": "123 4567 8901 2345",
+                                        "nullable": true
+                                    },
+                                    "diagnostico": {
+                                        "type": "string",
+                                        "example": "Diagnóstico do paciente",
+                                        "nullable": true
+                                    },
+                                    "responsaveis": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Responsavel"
+                                        },
+                                        "example": [
+                                            {
+                                                "nome": "João da Silva",
+                                                "cpf": "123.456.789-11",
+                                                "email": "joao@example.com",
+                                                "data_nascimento": "2000-01-01",
+                                                "sexo": "M",
+                                                "foto": "arquivo.jpg",
+                                                "cep": "00000-000",
+                                                "endereco": "Rua Exemplo",
+                                                "numero": "123",
+                                                "complemento": "Apto 101",
+                                                "bairro": "Centro",
+                                                "cidade": "Cidade Exemplo",
+                                                "estado": "Estado Exemplo",
+                                                "relacionamento": "Pai",
+                                                "responsavelFinanceiro": true
+                                            },
+                                            {
+                                                "nome": "Maria da Silva",
+                                                "cpf": "987.654.321-99",
+                                                "email": "maria@example.com",
+                                                "data_nascimento": "2002-03-15",
+                                                "sexo": "F",
+                                                "foto": "arquivo2.jpg",
+                                                "cep": "11111-111",
+                                                "endereco": "Rua Teste",
+                                                "numero": "456",
+                                                "complemento": "Casa",
+                                                "bairro": "Bairro Teste",
+                                                "cidade": "Cidade Teste",
+                                                "estado": "Estado Teste",
+                                                "relacionamento": "Mãe",
+                                                "responsavelFinanceiro": false
+                                            }
+                                        ]
+                                    },
+                                    "nomePai": {
+                                        "type": "string",
+                                        "example": "João da Silva",
+                                        "nullable": true
+                                    },
+                                    "nomeMãe": {
+                                        "type": "string",
+                                        "example": "Maria da Silva",
+                                        "nullable": true
+                                    },
+                                    "convenios": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paciente criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/pacientes/{id}": {
+            "get": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Buscar paciente por ID",
+                "operationId": "getPacienteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Paciente não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Atualizar paciente",
+                "operationId": "updatePaciente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do paciente a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "José Silva"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Paciente não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Excluir paciente",
+                "operationId": "deletePaciente",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Paciente excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Paciente não encontrado"
+                    }
+                }
+            }
+        },
+        "/pacientes/{id}/responsaveis": {
+            "get": {
+                "tags": [
+                    "Pacientes"
+                ],
+                "summary": "Buscar responsáveis do paciente",
+                "operationId": "getPacienteResponsaveis",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Paciente não encontrado"
+                    }
+                }
+            }
+        },
+        "/responsaveis": {
+            "get": {
+                "tags": [
+                    "Responsáveis"
+                ],
+                "summary": "Listar todos os responsáveis",
+                "operationId": "getResponsavelList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Responsáveis"
+                ],
+                "summary": "Cadastrar um novo responsavel",
+                "description": "Cria um novo registro de responsavel com os dados fornecidos.",
+                "operationId": "storeResponsavel",
+                "requestBody": {
+                    "description": "Dados do responsavel",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "cpf",
+                                    "email",
+                                    "data_nascimento",
+                                    "sexo"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "João da Silva"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "123.456.789-11"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "joao123@example.com"
+                                    },
+                                    "data_nascimento": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-01-01"
+                                    },
+                                    "sexo": {
+                                        "type": "string",
+                                        "example": "M"
+                                    },
+                                    "foto": {
+                                        "type": "string",
+                                        "example": "arquivo.jpg",
+                                        "nullable": true
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "00000-000",
+                                        "nullable": true
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Rua Exemplo",
+                                        "nullable": true
+                                    },
+                                    "numero": {
+                                        "type": "string",
+                                        "example": "123",
+                                        "nullable": true
+                                    },
+                                    "complemento": {
+                                        "type": "string",
+                                        "example": "Apto 101",
+                                        "nullable": true
+                                    },
+                                    "bairro": {
+                                        "type": "string",
+                                        "example": "Centro",
+                                        "nullable": true
+                                    },
+                                    "cidade": {
+                                        "type": "string",
+                                        "example": "Cidade Exemplo",
+                                        "nullable": true
+                                    },
+                                    "estado": {
+                                        "type": "string",
+                                        "example": "Estado Exemplo",
+                                        "nullable": true
+                                    },
+                                    "paciente_id": {
+                                        "type": "intenger",
+                                        "example": "1",
+                                        "nullable": true
+                                    },
+                                    "parentesco": {
+                                        "type": "string",
+                                        "example": "Pai",
+                                        "nullable": true
+                                    },
+                                    "relacionamento": {
+                                        "type": "string",
+                                        "example": "Responsavel",
+                                        "nullable": true
+                                    },
+                                    "responsavelFinanceiro": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Responsavel criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/responsaveis/{id}": {
+            "get": {
+                "tags": [
+                    "Responsáveis"
+                ],
+                "summary": "Buscar responsavel por ID",
+                "operationId": "getResponsavelById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do responsavel",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Responsavel não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Responsáveis"
+                ],
+                "summary": "Atualizar responsavel",
+                "operationId": "updateResponsavel",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do responsavel",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do responsavel a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "José Silva"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Responsavel não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Responsáveis"
+                ],
+                "summary": "Excluir responsavel",
+                "operationId": "deleteResponsavel",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do responsavel",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Responsavel excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Responsavel não encontrado"
+                    }
+                }
+            }
+        },
+        "/unidades": {
+            "get": {
+                "tags": [
+                    "Unidades"
+                ],
+                "summary": "Listar todos os unidades",
+                "operationId": "getUnidadeList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Unidades"
+                ],
+                "summary": "Cadastrar um novo unidade",
+                "description": "Cria um novo registro de unidade com os dados fornecidos.",
+                "operationId": "storeUnidade",
+                "requestBody": {
+                    "description": "Dados do unidade",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "endereco"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Unidade Ilha do leite"
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Av. Frei Matias Teves, 280 - Ilha do Leite, Recife - PE, 50070-465"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Unidade criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/unidades/{id}": {
+            "get": {
+                "tags": [
+                    "Unidades"
+                ],
+                "summary": "Buscar unidade por ID",
+                "operationId": "getUnidadeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do unidade",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Unidade não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Unidades"
+                ],
+                "summary": "Atualizar unidade",
+                "operationId": "updateUnidade",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do unidade",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do unidade a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Unidade Ilha do leite"
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Av. Frei Matias Teves, 280 - Ilha do Leite, Recife - PE, 50070-465"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Unidade não encontrado"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Unidades"
+                ],
+                "summary": "Excluir unidade",
+                "operationId": "deleteUnidade",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do unidade",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Unidade excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Unidade não encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Administrador": {
+                "required": [
+                    "nome",
+                    "cpf",
+                    "email",
+                    "password",
+                    "data_nascimento",
+                    "sexo"
+                ],
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "João da Silva"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "123.456.789-11"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "joao123@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "senha@123"
+                    },
+                    "data_nascimento": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2000-01-01"
+                    },
+                    "sexo": {
+                        "type": "string",
+                        "example": "M"
+                    },
+                    "foto": {
+                        "type": "string",
+                        "example": "arquivo.jpg",
+                        "nullable": true
+                    },
+                    "cep": {
+                        "type": "string",
+                        "example": "00000-000",
+                        "nullable": true
+                    },
+                    "endereco": {
+                        "type": "string",
+                        "example": "Rua Exemplo",
+                        "nullable": true
+                    },
+                    "numero": {
+                        "type": "string",
+                        "example": "123",
+                        "nullable": true
+                    },
+                    "complemento": {
+                        "type": "string",
+                        "example": "Apto 101",
+                        "nullable": true
+                    },
+                    "bairro": {
+                        "type": "string",
+                        "example": "Centro",
+                        "nullable": true
+                    },
+                    "cidade": {
+                        "type": "string",
+                        "example": "Cidade Exemplo",
+                        "nullable": true
+                    },
+                    "estado": {
+                        "type": "string",
+                        "example": "Estado Exemplo",
+                        "nullable": true
+                    },
+                    "telefone": {
+                        "type": "string",
+                        "example": "(00) 0000-0000",
+                        "nullable": true
+                    },
+                    "celular": {
+                        "type": "string",
+                        "example": "(00) 90000-0000",
+                        "nullable": true
+                    },
+                    "pais": {
+                        "type": "string",
+                        "example": "Brasil",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Convenio": {
+                "required": [
+                    "nome"
+                ],
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "Nome do Convenio"
+                    },
+                    "diasCarencia": {
+                        "type": "integer",
+                        "example": 30
+                    },
+                    "geraReceitas": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "numeroderegistro": {
+                        "type": "string",
+                        "example": "xxxxxx"
+                    },
+                    "codigonaoperadora": {
+                        "type": "string",
+                        "example": null
+                    },
+                    "versaoxml": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "tabela": {
+                        "type": "string",
+                        "example": "00"
+                    },
+                    "maxSessoesTiss": {
+                        "type": "integer",
+                        "example": 100
+                    }
+                },
+                "type": "object"
+            },
+            "Especialidade": {
+                "required": [
+                    "nome",
+                    "cbos"
+                ],
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "Psicologia"
+                    },
+                    "descricao": {
+                        "type": "string",
+                        "example": "Descrição da especialidade"
+                    },
+                    "cbos": {
+                        "type": "string",
+                        "example": "2515-10"
+                    }
+                },
+                "type": "object"
+            },
+            "Funcionario": {
+                "required": [
+                    "nome",
+                    "cpf",
+                    "email",
+                    "password",
+                    "data_nascimento",
+                    "sexo",
+                    "administrativo",
+                    "especialista"
+                ],
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "João da Silva"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "123.456.789-11"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "joao123@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "senha@123"
+                    },
+                    "data_nascimento": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2000-01-01"
+                    },
+                    "sexo": {
+                        "type": "string",
+                        "example": "M"
+                    },
+                    "foto": {
+                        "type": "string",
+                        "example": "arquivo.jpg",
+                        "nullable": true
+                    },
+                    "cep": {
+                        "type": "string",
+                        "example": "00000-000",
+                        "nullable": true
+                    },
+                    "endereco": {
+                        "type": "string",
+                        "example": "Rua Exemplo",
+                        "nullable": true
+                    },
+                    "numero": {
+                        "type": "string",
+                        "example": "123",
+                        "nullable": true
+                    },
+                    "complemento": {
+                        "type": "string",
+                        "example": "Apto 101",
+                        "nullable": true
+                    },
+                    "bairro": {
+                        "type": "string",
+                        "example": "Centro",
+                        "nullable": true
+                    },
+                    "cidade": {
+                        "type": "string",
+                        "example": "Cidade Exemplo",
+                        "nullable": true
+                    },
+                    "estado": {
+                        "type": "string",
+                        "example": "Estado Exemplo",
+                        "nullable": true
+                    },
+                    "telefone": {
+                        "type": "string",
+                        "example": "(00) 0000-0000",
+                        "nullable": true
+                    },
+                    "celular": {
+                        "type": "string",
+                        "example": "(00) 90000-0000",
+                        "nullable": true
+                    },
+                    "pais": {
+                        "type": "string",
+                        "example": "Brasil",
+                        "nullable": true
+                    },
+                    "data_criacao": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-03-11 12:34:56"
+                    },
+                    "area": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "administrativo": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "especialista": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "especialidade": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "calendario_id": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "numConselho": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "ufConselho": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "conselho": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "dataUltimoAcesso": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "system": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "deviceToken": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "data_contratacao": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Guia": {
+                "required": [
+                    "lote_numero",
+                    "id_convenio",
+                    "id_paciente",
+                    "id_procedimento",
+                    "status",
+                    "data",
+                    "quantidade",
+                    "valor",
+                    "id_contratado_executante",
+                    "id_profissional_executante"
+                ],
+                "properties": {
+                    "lote_numero": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "id_convenio": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "id_paciente": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "id_procedimento": {
+                        "type": "intenger",
+                        "example": "14"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": 0
+                    },
+                    "num_guia_prestador": {
+                        "type": "string",
+                        "example": "GP001"
+                    },
+                    "num_guia_operadora": {
+                        "type": "string",
+                        "example": "GO001"
+                    },
+                    "data": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-03-29"
+                    },
+                    "quantidade": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "valor": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 100
+                    },
+                    "tabela": {
+                        "type": "string",
+                        "example": "00"
+                    },
+                    "id_contratado_executante": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "codigo_operadora_contratado": {
+                        "type": "string",
+                        "example": "COD001"
+                    },
+                    "cnpj_contratado": {
+                        "type": "string",
+                        "example": "12345678901234"
+                    },
+                    "cnes_contratado": {
+                        "type": "string",
+                        "example": "CNES001"
+                    },
+                    "id_profissional_executante": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "codigo_operadora_profissional": {
+                        "type": "string",
+                        "example": "COD002"
+                    },
+                    "id_conselho": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "numero_conselho_profissional": {
+                        "type": "string",
+                        "example": "08"
+                    },
+                    "uf_conselho_profissional": {
+                        "type": "string",
+                        "example": 26
+                    },
+                    "cbo_s": {
+                        "type": "string",
+                        "example": "251510"
+                    },
+                    "tipo_consulta": {
+                        "type": "string",
+                        "example": "4"
+                    },
+                    "indicador_acidente": {
+                        "type": "string",
+                        "example": "9"
+                    },
+                    "cobertura_especial": {
+                        "type": "string",
+                        "example": "02"
+                    },
+                    "atendimento_regime": {
+                        "type": "string",
+                        "example": "01"
+                    },
+                    "observacao": {
+                        "type": "string",
+                        "example": "Observações adicionais"
+                    }
+                },
+                "type": "object"
+            },
+            "Lote": {
+                "required": [
+                    "id_convenio",
+                    "numero",
+                    "tipo",
+                    "data",
+                    "status",
+                    "valor_total"
+                ],
+                "properties": {
+                    "id_convenio": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "numero": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "example": "Consulta"
+                    },
+                    "data": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-06-30"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "0"
+                    },
+                    "valor_total": {
+                        "type": "number",
+                        "format": "decimal",
+                        "example": 100
+                    }
+                },
+                "type": "object"
+            },
+            "Marcacao": {
+                "required": [
+                    "id_paciente",
+                    "id_funcionario",
+                    "id_especialidade",
+                    "convenio",
+                    "duracao",
+                    "horario",
+                    "data_inicial",
+                    "recorrencia",
+                    "marcadoPor",
+                    "unidade"
+                ],
+                "properties": {
+                    "id_paciente": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "id_funcionario": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "id_especialidade": {
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "convenio": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "duracao": {
+                        "type": "integer",
+                        "example": 60
+                    },
+                    "horario": {
+                        "type": "string",
+                        "format": "hour",
+                        "example": "14:00:00"
+                    },
+                    "data_inicial": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-03-18"
+                    },
+                    "recorrencia": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "tipoRecorrencia": {
+                        "type": "string",
+                        "enum": [
+                            "s = semanal",
+                            "q = quinzenal",
+                            "m = mensal"
+                        ],
+                        "example": "semanal"
+                    },
+                    "vezesRecorrencia": {
+                        "type": "integer",
+                        "example": 4
+                    },
+                    "marcadoPor": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "unidade": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "Paciente": {
+                "required": [
+                    "nome",
+                    "cpf",
+                    "email",
+                    "data_nascimento",
+                    "sexo",
+                    "responsaveis"
+                ],
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "José Silva"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "000.000.000-00"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "jose.silva@example.com",
+                        "nullable": true
+                    },
+                    "data_nascimento": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2000-01-01"
+                    },
+                    "sexo": {
+                        "type": "string",
+                        "example": "M"
+                    },
+                    "foto": {
+                        "type": "string",
+                        "example": "arquivo.jpg",
+                        "nullable": true
+                    },
+                    "cep": {
+                        "type": "string",
+                        "example": "00000-000",
+                        "nullable": true
+                    },
+                    "endereco": {
+                        "type": "string",
+                        "example": "Rua Exemplo",
+                        "nullable": true
+                    },
+                    "numero": {
+                        "type": "string",
+                        "example": "123",
+                        "nullable": true
+                    },
+                    "complemento": {
+                        "type": "string",
+                        "example": "Apto 101",
+                        "nullable": true
+                    },
+                    "bairro": {
+                        "type": "string",
+                        "example": "Centro",
+                        "nullable": true
+                    },
+                    "cidade": {
+                        "type": "string",
+                        "example": "Cidade Exemplo",
+                        "nullable": true
+                    },
+                    "estado": {
+                        "type": "string",
+                        "example": "Estado Exemplo",
+                        "nullable": true
+                    },
+                    "telefone": {
+                        "type": "string",
+                        "example": "(00) 0000-0000",
+                        "nullable": true
+                    },
+                    "celular": {
+                        "type": "string",
+                        "example": "(00) 90000-0000",
+                        "nullable": true
+                    },
+                    "pais": {
+                        "type": "string",
+                        "example": "Brasil",
+                        "nullable": true
+                    },
+                    "cns": {
+                        "type": "string",
+                        "example": "123 4567 8901 2345",
+                        "nullable": true
+                    },
+                    "diagnostico": {
+                        "type": "string",
+                        "example": "Diagnóstico do paciente",
+                        "nullable": true
+                    },
+                    "responsaveis": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Responsavel"
+                        },
+                        "example": [
+                            {
+                                "nome": "João da Silva",
+                                "cpf": "123.456.789-11",
+                                "email": "joao@example.com",
+                                "data_nascimento": "2000-01-01",
+                                "sexo": "M",
+                                "foto": "arquivo.jpg",
+                                "cep": "00000-000",
+                                "endereco": "Rua Exemplo",
+                                "numero": "123",
+                                "complemento": "Apto 101",
+                                "bairro": "Centro",
+                                "cidade": "Cidade Exemplo",
+                                "parentesco": "Pai",
+                                "relacionamento": "Responsável",
+                                "responsavelFinanceiro": true
+                            },
+                            {
+                                "nome": "Maria da Silva",
+                                "cpf": "987.654.321-99",
+                                "email": "maria@example.com",
+                                "data_nascimento": "2002-03-15",
+                                "sexo": "F",
+                                "foto": "arquivo2.jpg",
+                                "cep": "11111-111",
+                                "endereco": "Rua Teste",
+                                "numero": "456",
+                                "complemento": "Casa",
+                                "bairro": "Bairro Teste",
+                                "cidade": "Cidade Teste",
+                                "estado": "Estado Teste",
+                                "parentesco": "Mãe",
+                                "relacionamento": "Responsável",
+                                "responsavelFinanceiro": false
+                            }
+                        ]
+                    },
+                    "nomePai": {
+                        "type": "string",
+                        "example": "Nome do Pai",
+                        "nullable": true
+                    },
+                    "nomeMãe": {
+                        "type": "string",
+                        "example": "Nome da Mãe",
+                        "nullable": true
+                    },
+                    "convenios": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "example": [
+                            1,
+                            2
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "Responsavel": {
+                "required": [
+                    "nome",
+                    "cpf",
+                    "email",
+                    "data_nascimento",
+                    "sexo",
+                    "paciente_id",
+                    "relacionamento",
+                    "responsavelFinanceiro"
+                ],
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "João da Silva"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "123.456.789-11"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "joao@example.com"
+                    },
+                    "data_nascimento": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2000-01-01"
+                    },
+                    "sexo": {
+                        "type": "string",
+                        "example": "M"
+                    },
+                    "foto": {
+                        "type": "string",
+                        "example": "arquivo.jpg",
+                        "nullable": true
+                    },
+                    "cep": {
+                        "type": "string",
+                        "example": "00000-000",
+                        "nullable": true
+                    },
+                    "endereco": {
+                        "type": "string",
+                        "example": "Rua Exemplo",
+                        "nullable": true
+                    },
+                    "numero": {
+                        "type": "string",
+                        "example": "123",
+                        "nullable": true
+                    },
+                    "complemento": {
+                        "type": "string",
+                        "example": "Apto 101",
+                        "nullable": true
+                    },
+                    "bairro": {
+                        "type": "string",
+                        "example": "Centro",
+                        "nullable": true
+                    },
+                    "cidade": {
+                        "type": "string",
+                        "example": "Cidade Exemplo",
+                        "nullable": true
+                    },
+                    "estado": {
+                        "type": "string",
+                        "example": "Estado Exemplo",
+                        "nullable": true
+                    },
+                    "paciente_id": {
+                        "description": "ID do paciente associado a este responsável (chave estrangeira da tabela pacientes).",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "parentesco": {
+                        "type": "string",
+                        "example": "Pai",
+                        "nullable": true
+                    },
+                    "relacionamento": {
+                        "type": "string",
+                        "example": "Responsavel",
+                        "nullable": true
+                    },
+                    "responsavelFinanceiro": {
+                        "type": "boolean",
+                        "example": "true"
+                    }
+                },
+                "type": "object"
+            },
+            "Unidade": {
+                "required": [
+                    "nome",
+                    "endereco"
+                ],
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "example": "Unidade Ilha do leite"
+                    },
+                    "endereco": {
+                        "type": "string",
+                        "example": "Av. Frei Matias Teves, 280 - Ilha do Leite, Recife - PE, 50070-465"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
