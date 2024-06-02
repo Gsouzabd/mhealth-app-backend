@@ -24,9 +24,10 @@ class PacienteRequest extends FormRequest
         return [
             'cpf' => 'required|unique:pacientes|min:14',
             'nome' => 'required|min:3|max:255',
+            'email' => 'required|email|unique:pacientes',
             'data_nascimento' => 'required|date',
             'sexo' => 'required|string|max:1',
-            'responsaveis' => 'required|array',
+            // 'responsaveis' => 'required|array',
         ];
     }
 }

@@ -53,11 +53,14 @@ Route::post('/autenticacao', function (Request $request) {
         return response()->json(['data' => 'Unauthorized'], 401);
     }
 
-
     $token = $user->createToken('token');
 
-    return response()->json(['token' => $token->plainTextToken]);
+    return response()->json([
+        'token' => $token->plainTextToken,
+        'user_id' => $user->id
+    ]);
 });
+
 
 
 Route::middleware('auth:sanctum')->group(function () {

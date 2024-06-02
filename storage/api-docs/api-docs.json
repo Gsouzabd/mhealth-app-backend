@@ -2299,58 +2299,6 @@
                                         "example": "Diagnóstico do paciente",
                                         "nullable": true
                                     },
-                                    "responsaveis": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/components/schemas/Responsavel"
-                                        },
-                                        "example": [
-                                            {
-                                                "nome": "João da Silva",
-                                                "cpf": "123.456.789-11",
-                                                "email": "joao@example.com",
-                                                "data_nascimento": "2000-01-01",
-                                                "sexo": "M",
-                                                "foto": "arquivo.jpg",
-                                                "cep": "00000-000",
-                                                "endereco": "Rua Exemplo",
-                                                "numero": "123",
-                                                "complemento": "Apto 101",
-                                                "bairro": "Centro",
-                                                "cidade": "Cidade Exemplo",
-                                                "estado": "Estado Exemplo",
-                                                "relacionamento": "Pai",
-                                                "responsavelFinanceiro": true
-                                            },
-                                            {
-                                                "nome": "Maria da Silva",
-                                                "cpf": "987.654.321-99",
-                                                "email": "maria@example.com",
-                                                "data_nascimento": "2002-03-15",
-                                                "sexo": "F",
-                                                "foto": "arquivo2.jpg",
-                                                "cep": "11111-111",
-                                                "endereco": "Rua Teste",
-                                                "numero": "456",
-                                                "complemento": "Casa",
-                                                "bairro": "Bairro Teste",
-                                                "cidade": "Cidade Teste",
-                                                "estado": "Estado Teste",
-                                                "relacionamento": "Mãe",
-                                                "responsavelFinanceiro": false
-                                            }
-                                        ]
-                                    },
-                                    "nomePai": {
-                                        "type": "string",
-                                        "example": "João da Silva",
-                                        "nullable": true
-                                    },
-                                    "nomeMãe": {
-                                        "type": "string",
-                                        "example": "Maria da Silva",
-                                        "nullable": true
-                                    },
                                     "convenios": {
                                         "type": "array",
                                         "items": {

@@ -31,7 +31,7 @@ Em seu terminal realize o comando:
 1. Copie o .env-example e crie o arquivo .env do projeto com o comando:
 
     ```bash
-    cp env.example .env
+    cp .env.example .env
     ```
 2. Configure o .env informando as portas compatíveis ao docker-compose.yml
 
@@ -50,7 +50,7 @@ Em seu terminal realize o comando:
 1. Para acessar o terminal do container da aplicação execute o comando:
 
     ```bash
-    docker exec app bash
+    docker compose exec app bash
     ```
 
 

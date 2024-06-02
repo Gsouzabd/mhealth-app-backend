@@ -8,7 +8,7 @@ use App\Models\Responsavel;
 
 /**
  * @OA\Schema(
- *      required={"nome", "cpf", "email", "data_nascimento", "sexo", "responsaveis"},
+ *      required={"nome", "cpf", "email", "data_nascimento", "sexo"},
 *             @OA\Property(property="nome", type="string", example="José Silva"),
 *             @OA\Property(property="cpf", type="string", example="000.000.000-00"),
 *             @OA\Property(property="email", type="string", example="jose.silva@example.com", nullable=true),
