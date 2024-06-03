@@ -33,29 +33,30 @@ class PacienteService
         return $paciente;
     }
 
-    public function create(array $data): Array
+    public function create(array $data): ?Paciente
     {
         // Cria o paciente e obtém o modelo criado
         $paciente = $this->pacienteRepository->create($data);
 
         // Cria o(s) responsável(is) associado(s) ao paciente
         $responsaveis = [];
-        $responsaveisArray = $data['responsaveis'];
-        foreach ($responsaveisArray as $responsavelData) {
-            $responsavelData['responsavelFinanceiro'] = $responsavelData['responsavelFinanceiro'] == true ? 1 : 0;
-            $responsavelData['paciente_id'] = $paciente->id;
-            $responsaveis[] = $this->responsavelRepository->create($responsavelData);
+        $responsaveisArray = isset($data['responsaveis']) ? $data['responsaveis'] : [];
+        if(count($responsaveisArray) > 0) {
+            foreach ($responsaveisArray as $responsavelData) {
+                $responsavelData['responsavelFinanceiro'] = $responsavelData['responsavelFinanceiro'] == true ? 1 : 0;
+                $responsavelData['paciente_id'] = $paciente->id;
+                $responsaveis[] = $this->responsavelRepository->create($responsavelData);
+            }
+
+            if(isset($data['convenios'])) {
+                $convenios = $data['convenios'];
+                foreach ($convenios as $convenioId) {
+                    $paciente->convenios()->attach($convenioId);
+                }
+            }
         }
 
-        $convenios = $data['convenios'];
-        foreach ($convenios as $convenioId) {
-            $paciente->convenios()->attach($convenioId);
-        }
-
-        return [
-            'paciente' => $paciente,
-            'responsaveis' => $responsaveis
-        ];
+        return $paciente;
     }
 
 

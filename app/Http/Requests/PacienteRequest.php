@@ -22,7 +22,7 @@ class PacienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf' => 'required|unique:pacientes|min:14',
+            'cpf' => 'required|unique:pacientes|min:11',
             'nome' => 'required|min:3|max:255',
             'email' => 'required|email|unique:pacientes',
             'data_nascimento' => 'required|date',

@@ -22,7 +22,7 @@ class FuncionarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf' => 'required|unique:funcionarios|min:14',
+            'cpf' => 'required|unique:funcionarios|min:11',
             'nome' => 'required|min:3|max:255',
             'data_nascimento' => 'required|date',
             'email' => 'required|email',
