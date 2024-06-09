@@ -96,6 +96,7 @@ class Paciente extends Usuario
         parent::__construct($attributes);
 
         $this->fillable = array_merge($this->fillable, [
+            'password',
             'cns',
             'diagnostico',
             'nomePai',

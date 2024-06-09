@@ -243,4 +243,48 @@ class EspecialidadeController extends Controller
             return response()->json(['error' => $e->getMessage()], 404);
         }
     }
+
+       /**
+     * @OA\Delete(
+     *     path="/especialidades/{id}/especialistas",
+     *     operationId="getEspecialidadeEspecialistas",
+     *     tags={"Especialidades"},
+     *     summary="Buscar especialistas da especialidade",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID da especialidade",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Especialidade excluído com sucesso",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Não Autenticado",
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Proibido"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Especialidade não encontrado"
+     *     )
+     * )
+     */
+    public function especialistas(string $id)
+    {
+        try {
+            $especialistas = $this->service->especialistas($id);
+            return response()->json($especialistas);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 404);
+        }
+    }
+
 }

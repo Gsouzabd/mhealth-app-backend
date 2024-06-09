@@ -27,6 +27,8 @@ class EspecialidadeService
         if (!$especialidade) {
             throw new ModelNotFoundException("Especialidade não encontrado com o ID: $id");
         }
+
+        $especialidade->load('especialistas');
         return $especialidade;
     }
 
@@ -55,5 +57,18 @@ class EspecialidadeService
         }
 
         return $this->repository->update($data, $id);
+    }
+
+
+    public function especialistas(string $idEspecialidade): ?Especialidade
+    {
+        $especialidade = $this->repository->findById($idEspecialidade);
+
+        if (!$especialidade) {
+            throw new ModelNotFoundException("Especialidade não encontrado com o ID: $idEspecialidade");
+        }
+
+        $especialidade->load('especialistas');
+        return $especialidade;
     }
 }

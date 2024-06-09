@@ -57,6 +57,13 @@ class FuncionarioService
             throw new ModelNotFoundException("Não é possível atualizar. Funcionario não encontrado com o ID: $id");
         }
 
+        if(isset($data['especialidade'])) {
+            $especialidades = $data['especialidade'];
+            foreach ($especialidades as $especialidadeId) {
+                $funcionario->especialidades()->attach($especialidadeId);
+            }
+        }
+
         return $this->repository->update($data, $id);
     }
 }

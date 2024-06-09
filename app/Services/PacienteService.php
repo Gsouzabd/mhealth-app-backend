@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Paciente;
+use Illuminate\Support\Facades\Hash;
 use App\Repositories\PacienteRepository;
 use App\Repositories\ResponsavelRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -30,11 +31,15 @@ class PacienteService
         if (!$paciente) {
             throw new ModelNotFoundException("Paciente não encontrado com o ID: $id");
         }
+
+        $paciente->load('convenios', 'responsaveis');
         return $paciente;
     }
 
     public function create(array $data): ?Paciente
     {
+        $data['password'] = Hash::make($data['password']);
+
         // Cria o paciente e obtém o modelo criado
         $paciente = $this->pacienteRepository->create($data);
 
@@ -74,10 +79,19 @@ class PacienteService
 
     public function update(array $data, string $id): ?Paciente
     {
+        if(isset($data['password'])){$data['password'] = Hash::make($data['password']);}
+        
         $paciente = $this->pacienteRepository->findById($id);
 
         if (!$paciente) {
             throw new ModelNotFoundException("Não é possível atualizar. Paciente não encontrado com o ID: $id");
+        }
+
+        if(isset($data['convenios'])) {
+            $convenios = $data['convenios'];
+            foreach ($convenios as $convenioId) {
+                $paciente->convenios()->attach($convenioId);
+            }
         }
 
         return $this->pacienteRepository->update($data, $id);

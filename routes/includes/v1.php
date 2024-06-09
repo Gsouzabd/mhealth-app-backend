@@ -25,7 +25,6 @@ use App\Http\Controllers\Api\MarcacaoController;
 use App\Http\Controllers\Api\PacienteController;
 use App\Http\Controllers\Api\ResponsavelController;
 use App\Http\Controllers\Api\UnidadeController;
-use App\Services\UfService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +39,8 @@ Route::post('/autenticacao', function (Request $request) {
     $credentials = $request->only('email', 'password');
     $prefixes = [
         'administradores',
-        'funcionarios'
+        'funcionarios',
+        'pacientes'
     ];
 
     foreach ($prefixes as $prefix) {
@@ -102,6 +102,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/lotes/{idConvenio}/{numeroLote}/xml', 'generateXML');
     });
 
+    Route::controller(EspecialidadeController::class)->group(function () {
+        Route::get('/especialidades/{idEspecialidade}/especialistas', 'especialistas');
+    });
 
 
     // /*--- Ufs ---*/

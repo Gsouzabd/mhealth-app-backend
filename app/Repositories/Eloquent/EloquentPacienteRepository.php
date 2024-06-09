@@ -61,7 +61,9 @@ class EloquentPacienteRepository implements PacienteRepository
 
     public function update(array $data, string $id): ?Paciente
     {
+        
         $paciente = $this->model->find($id);
+
         if (!$paciente) {
             return null;
         }

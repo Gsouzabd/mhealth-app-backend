@@ -48,6 +48,10 @@ return [
             'driver' => 'session',
             'provider' => 'funcionarios',
         ],
+        'pacientes' => [
+            'driver' => 'session',
+            'provider' => 'pacientes',
+        ],
     ],
 
     /*
@@ -79,6 +83,10 @@ return [
         'funcionarios' => [
             'driver' => 'eloquent',
             'model' => App\Models\Funcionario::class,
+        ],
+        'pacientes' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Paciente::class,
         ],
 
         // 'users' => [
@@ -121,6 +129,12 @@ return [
         ],
         'funcionarios' => [
             'provider' => 'funcionarios',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'pacientes' => [
+            'provider' => 'pacientes',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
