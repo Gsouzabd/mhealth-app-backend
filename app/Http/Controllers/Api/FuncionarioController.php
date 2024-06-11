@@ -80,7 +80,7 @@ class FuncionarioController extends Controller
             *      @OA\Property(property="administrativo", type="boolean", example=true),
             *      @OA\Property(property="especialista", type="boolean", example=false),
             * @OA\Property(
-            *          property="convenios",
+            *          property="especialidade",
             *      type="array",
             *          @OA\Items(
             *             type="integer",
