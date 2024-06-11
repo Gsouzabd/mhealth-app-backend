@@ -28,7 +28,19 @@ use App\Models\Usuario;
  *      @OA\Property(property="area", type="string", nullable=true),
  *      @OA\Property(property="administrativo", type="boolean", example=true),
  *      @OA\Property(property="especialista", type="boolean", example=false),
- *      @OA\Property(property="especialidade", type="string", nullable=true),
+     * @OA\Property(
+     *          property="especialidade",
+     *      type="array",
+     *          @OA\Items(
+     *             type="integer",
+     *            example="1",
+     *         ),
+     *               @OA\Items(
+     *              type="integer",
+     *             example="1",
+     *          ),
+     *         example={1, 2},
+     *     ),
  *      @OA\Property(property="calendario_id", type="integer", nullable=true),
  *      @OA\Property(property="numConselho", type="string", nullable=true),
  *      @OA\Property(property="ufConselho", type="string", nullable=true),

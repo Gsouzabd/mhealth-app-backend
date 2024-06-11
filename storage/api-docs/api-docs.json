@@ -1127,9 +1127,16 @@
                                         "type": "boolean",
                                         "example": false
                                     },
-                                    "especialidade": {
-                                        "type": "string",
-                                        "nullable": true
+                                    "convenios": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "example": [
+                                            1,
+                                            2
+                                        ]
                                     },
                                     "calendario_id": {
                                         "type": "integer",
@@ -3303,8 +3310,15 @@
                         "example": false
                     },
                     "especialidade": {
-                        "type": "string",
-                        "nullable": true
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": "1"
+                        },
+                        "example": [
+                            1,
+                            2
+                        ]
                     },
                     "calendario_id": {
                         "type": "integer",
