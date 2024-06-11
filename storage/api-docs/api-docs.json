@@ -1127,7 +1127,7 @@
                                         "type": "boolean",
                                         "example": false
                                     },
-                                    "convenios": {
+                                    "especialidade": {
                                         "type": "array",
                                         "items": {
                                             "type": "integer",
