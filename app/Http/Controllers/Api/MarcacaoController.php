@@ -65,8 +65,7 @@ class MarcacaoController extends Controller
          * *     @OA\Property(property="duracao", type="integer", example=60),
          * *     @OA\Property(property="horario", type="string", format="hour", example="14:00:00"),
          * *     @OA\Property(property="data_inicial", type="string", format="date", example="2024-03-18"),
-         * *     @OA\Property(property="recorrencia", type="boolean", example=true),
-         * *     @OA\Property(property="tipoRecorrencia", type="string", enum={"s = semanal", "q = quinzenal", "m = mensal"}, example="semanal"),
+         * *     @OA\Property(property="recorrencia", type="boolean", example=false),
          * *     @OA\Property(property="vezesRecorrencia", type="integer", example=4),
          * *     @OA\Property(property="marcadoPor", type="integer", example=1),
          * *     @OA\Property(property="unidade", type="integer", example=1)

@@ -16,6 +16,7 @@
 use App\Helpers\HelpersTiss;
 use App\Http\Controllers\Api\AdministradorController;
 use App\Http\Controllers\Api\AtendimentoController;
+use App\Http\Controllers\Api\ConfiguracaoController;
 use App\Http\Controllers\Api\ConvenioController;
 use App\Http\Controllers\Api\EspecialidadeController;
 use App\Http\Controllers\Api\FuncionarioController;
@@ -69,6 +70,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'administradores' => AdministradorController::class,
         'atendimentos' => AtendimentoController::class,
         'convenios' => ConvenioController::class,
+        'configuracoes' => ConfiguracaoController::class,
         'especialidades' => EspecialidadeController::class,
         'funcionarios' => FuncionarioController::class,
         'guias' => GuiaController::class,

@@ -1964,16 +1964,7 @@
                                     },
                                     "recorrencia": {
                                         "type": "boolean",
-                                        "example": true
-                                    },
-                                    "tipoRecorrencia": {
-                                        "type": "string",
-                                        "enum": [
-                                            "s = semanal",
-                                            "q = quinzenal",
-                                            "m = mensal"
-                                        ],
-                                        "example": "semanal"
+                                        "example": false
                                     },
                                     "vezesRecorrencia": {
                                         "type": "integer",
@@ -3135,6 +3126,71 @@
                         "type": "string",
                         "example": "Brasil",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Configuracao": {
+                "properties": {
+                    "logo": {
+                        "type": "string",
+                        "example": "url_to_logo.png"
+                    },
+                    "nome_empresa": {
+                        "type": "string",
+                        "example": "Nome da Empresa"
+                    },
+                    "telefone": {
+                        "type": "string",
+                        "example": "+5511999999999"
+                    },
+                    "titulo": {
+                        "type": "string",
+                        "example": "Título da Empresa"
+                    },
+                    "descricao": {
+                        "type": "string",
+                        "example": "Descrição da Empresa"
+                    },
+                    "textoFooter": {
+                        "type": "string",
+                        "example": "Texto do rodapé da Empresa"
+                    },
+                    "banner_app": {
+                        "type": "string",
+                        "example": "url_to_banner_app.png"
+                    },
+                    "banner_site": {
+                        "type": "string",
+                        "example": "url_to_banner_site.png"
+                    },
+                    "banner_site_mobile": {
+                        "type": "string",
+                        "example": "url_to_banner_site_mobile.png"
+                    },
+                    "segunda_sexta": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "segunda_sexta_horario_inicio": {
+                        "type": "string",
+                        "example": "08:00"
+                    },
+                    "segunda_sexta_horario_fim": {
+                        "type": "string",
+                        "example": "18:00"
+                    },
+                    "sabado_domingo": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "sabado_domingo_horario_inicio": {
+                        "type": "string",
+                        "example": "08:00"
+                    },
+                    "sabado_domingo_horario_fim": {
+                        "type": "string",
+                        "example": "18:00"
                     }
                 },
                 "type": "object"
