@@ -11,7 +11,7 @@ class ConfiguracaoController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/configurações",
+     *     path="/configuracoes",
      *     operationId="getConfigs",
      *     tags={"Configuraçoes"},
      *     summary="Listar ultimas configs",
