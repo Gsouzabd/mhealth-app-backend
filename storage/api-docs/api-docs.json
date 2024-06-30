@@ -603,15 +603,15 @@
                                     },
                                     "banner_app": {
                                         "type": "string",
-                                        "example": "data:@file/png;base64"
+                                        "example": "data:@file/png;base64..."
                                     },
                                     "banner_site": {
                                         "type": "string",
-                                        "example": "data:@file/png;base64"
+                                        "example": "data:@file/png;base64..."
                                     },
                                     "banner_site_mobile": {
                                         "type": "string",
-                                        "example": "data:@file/png;base64"
+                                        "example": "data:@file/png;base64..."
                                     },
                                     "segunda_sexta": {
                                         "type": "boolean",
