@@ -9,12 +9,82 @@ use Illuminate\Support\Facades\Storage;
 
 class ConfiguracaoController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/configurações",
+     *     operationId="getConfigs",
+     *     tags={"Configuraçoes"},
+     *     summary="Listar ultimas configs",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operação bem-sucedida",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Não Autenticado",
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Proibido",
+     *     )
+     * )
+     */
     public function index()
     {
-        $configuracoes = Configuracao::all();
+        $configuracoes = Configuracao::latest()->first();
         return response()->json($configuracoes);
     }
 
+    /**
+     * @OA\Post(
+     *     path="/configuracoes",
+     *     operationId="storeConfiguracao",
+     *     tags={"Configuraçoes"},
+     *     summary="Cadastrar uma novo configuração",
+     *     description="Cria um novo registro de configuração com os dados fornecidos.",
+     *  @OA\RequestBody(
+     *      required=true,
+     *      description="Dados da configuração",
+     *      @OA\JsonContent(
+    *   @OA\Property(property="logo", type="string", example="url_to_logo.png"),
+    *   @OA\Property(property="nome_empresa", type="string", example="Nome da Empresa"),
+    *   @OA\Property(property="telefone", type="string", example="+5511999999999"),
+    *   @OA\Property(property="titulo", type="string", example="Título da Empresa"),
+    *   @OA\Property(property="descricao", type="string", example="Descrição da Empresa"),
+    *   @OA\Property(property="textoFooter", type="string", example="Texto do rodapé da Empresa"),
+    *   @OA\Property(property="banner_app", type="string", example="url_to_banner_app.png"),
+    *   @OA\Property(property="banner_site", type="string", example="url_to_banner_site.png"),
+    *   @OA\Property(property="banner_site_mobile", type="string", example="url_to_banner_site_mobile.png"),
+    *   @OA\Property(property="segunda_sexta", type="boolean", example=true),
+    *   @OA\Property(property="segunda_sexta_horario_inicio", type="string", example="08:00"),
+    *   @OA\Property(property="segunda_sexta_horario_fim", type="string", example="18:00"),
+    *   @OA\Property(property="sabado_domingo", type="boolean", example=true),
+    *   @OA\Property(property="sabado_domingo_horario_inicio", type="string", example="08:00"),
+    *   @OA\Property(property="sabado_domingo_horario_fim", type="string", example="18:00"),
+     *      ),
+     *  ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="configuração criado com sucesso",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Erro na requisição",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Não autenticado",
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Proibido",
+     *     ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Erro de validação",
+     *      )
+     * )
+     */
     public function store(Request $request)
     {
         $data = $request->except(['logo', 'banner_app', 'banner_site', 'banner_site_mobile']);
