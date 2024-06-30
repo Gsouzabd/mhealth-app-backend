@@ -17,6 +17,7 @@ use App\Helpers\HelpersTiss;
 use App\Http\Controllers\Api\AdministradorController;
 use App\Http\Controllers\Api\AtendimentoController;
 use App\Http\Controllers\Api\ConfiguracaoController;
+use App\Http\Controllers\Api\ConsultaController;
 use App\Http\Controllers\Api\ConvenioController;
 use App\Http\Controllers\Api\EspecialidadeController;
 use App\Http\Controllers\Api\FuncionarioController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Api\MarcacaoController;
 use App\Http\Controllers\Api\PacienteController;
 use App\Http\Controllers\Api\ResponsavelController;
 use App\Http\Controllers\Api\UnidadeController;
+use App\Models\Consulta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +72,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'administradores' => AdministradorController::class,
         'atendimentos' => AtendimentoController::class,
         'convenios' => ConvenioController::class,
+        'consultas' => ConsultaController::class,
         'configuracoes' => ConfiguracaoController::class,
         'especialidades' => EspecialidadeController::class,
         'funcionarios' => FuncionarioController::class,
@@ -106,6 +109,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::controller(EspecialidadeController::class)->group(function () {
         Route::get('/especialidades/{idEspecialidade}/especialistas', 'especialistas');
+    });
+
+    Route::controller(EspecialidadeController::class)->group(function () {
+        Route::get('/especialidades/{idEspecialidade}/especialistas/{idUnidade}', 'especialistasByUnidade');
     });
 
 

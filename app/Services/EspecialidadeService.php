@@ -71,4 +71,28 @@ class EspecialidadeService
         $especialidade->load('especialistas');
         return $especialidade;
     }
+
+    public function especialistasByUnidade(string $idEspecialidade, string $idUnidade): ?array
+    {
+        $especialidade = $this->repository->findById($idEspecialidade);
+
+        if (!$especialidade) {
+            throw new ModelNotFoundException("Especialidade não encontrado com o ID: $idEspecialidade");
+        }
+
+        $especialistasEsp = $especialidade->load('especialistas')
+                                            ->load('especialistas.unidades');
+        foreach ($especialistasEsp->especialistas as $especialista) {
+            foreach($especialista->unidades as $unidade) {
+                if($unidade->id == $idUnidade) {
+                    $especialistas[] = $especialista;
+                }
+            }
+        }
+        
+            
+        return $especialistas;
+    }
+
+
 }

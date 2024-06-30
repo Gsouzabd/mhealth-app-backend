@@ -34,8 +34,15 @@ class FuncionarioService
     public function create(array $data): Funcionario
     {
         $data['password'] = Hash::make($data['password']);
-
-        return $this->repository->create($data);
+        $funcionario = $this->repository->create($data);
+        if(isset($data['unidades'])) {
+            $unidades = $data['unidades'];
+            foreach ($unidades as $unidadeId) {
+                $funcionario->unidades()->attach($unidadeId, ['turno_id' => 3]);   
+            }
+        }
+        return $funcionario->load('unidades');
+    
     }
     
     public function delete(string $id): void

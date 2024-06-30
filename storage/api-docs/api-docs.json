@@ -403,147 +403,6 @@
                 }
             }
         },
-        "/atendimentos": {
-            "get": {
-                "tags": [
-                    "Atendimentos"
-                ],
-                "summary": "Listar todas as marcações",
-                "operationId": "getAtendimentoList",
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    }
-                }
-            }
-        },
-        "/atendimentos/{id}": {
-            "get": {
-                "tags": [
-                    "Atendimentos"
-                ],
-                "summary": "Buscar atendimento por ID",
-                "operationId": "getAtendimentoById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da atendimento",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Marcação não encontrado"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Atendimentos"
-                ],
-                "summary": "Atualizar atendimento",
-                "operationId": "updateAtendimento",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da atendimento",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Dados do atendimento a serem alterados. Verifique os campos no Schema",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "status": {
-                                        "type": "string",
-                                        "example": "em andamento"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Marcação não encontrado"
-                    },
-                    "422": {
-                        "description": "Erro de validação"
-                    },
-                    "500": {
-                        "description": "Erro interno do servidor"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Atendimentos"
-                ],
-                "summary": "Excluir atendimento",
-                "operationId": "deleteAtendimento",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da atendimento",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Marcação excluído com sucesso"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Marcação não encontrado"
-                    }
-                }
-            }
-        },
         "/configuracoes": {
             "get": {
                 "tags": [
@@ -658,6 +517,213 @@
                     },
                     "422": {
                         "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/consultas": {
+            "get": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Listar todas as consultas",
+                "operationId": "getConsultaList",
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Cadastrar uma nova consulta",
+                "description": "Cria um novo registro de consulta com os dados fornecidos.",
+                "operationId": "storeConsulta",
+                "requestBody": {
+                    "description": "Dados da consulta",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "dataHora",
+                                    "id_funcionario",
+                                    "id_especialidade",
+                                    "unidadeId",
+                                    "id_paciente"
+                                ],
+                                "properties": {
+                                    "dataHora": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-01-01T15:00:00Z"
+                                    },
+                                    "id_funcionario": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "id_especialidade": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "unidadeId": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "id_paciente": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consulta criada com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro na requisição"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
+        "/consultas/{id}": {
+            "get": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Buscar consulta por ID",
+                "operationId": "getConsultaById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da consulta",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Consulta não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Atualizar consulta",
+                "operationId": "updateConsulta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da consulta",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados da consulta a serem alterados. Verifique os campos no Schema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "dataHora": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação bem-sucedida"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Consulta não encontrada"
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Consultas"
+                ],
+                "summary": "Excluir consulta",
+                "operationId": "deleteConsulta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da consulta",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Consulta excluída com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Consulta não encontrada"
                     }
                 }
             }
@@ -1072,12 +1138,44 @@
             }
         },
         "/especialidades/{id}/especialistas": {
-            "delete": {
+            "get": {
                 "tags": [
                     "Especialidades"
                 ],
                 "summary": "Buscar especialistas da especialidade",
                 "operationId": "getEspecialidadeEspecialistas",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID da especialidade",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Especialidade excluído com sucesso"
+                    },
+                    "401": {
+                        "description": "Não Autenticado"
+                    },
+                    "403": {
+                        "description": "Proibido"
+                    },
+                    "404": {
+                        "description": "Especialidade não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Especialidades"
+                ],
+                "summary": "Buscar especialistas da especialidade",
+                "operationId": "getEspecialidadeEspecialistasByUnidade",
                 "parameters": [
                     {
                         "name": "id",
@@ -1440,883 +1538,6 @@
                     },
                     "404": {
                         "description": "Funcionario não encontrado"
-                    }
-                }
-            }
-        },
-        "/guias": {
-            "get": {
-                "tags": [
-                    "Guias"
-                ],
-                "summary": "Listar todos as guias",
-                "operationId": "getGuiaList",
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Guias"
-                ],
-                "summary": "Cadastrar uma nova guia",
-                "description": "Cria um novo registro de guia com os dados fornecidos.",
-                "operationId": "storeGuia",
-                "requestBody": {
-                    "description": "Dados da guia",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "lote_numero",
-                                    "id_convenio",
-                                    "id_paciente",
-                                    "id_procedimento",
-                                    "status",
-                                    "data",
-                                    "quantidade",
-                                    "valor",
-                                    "id_contratado_executante",
-                                    "id_profissional_executante"
-                                ],
-                                "properties": {
-                                    "lote_numero": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "id_convenio": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "id_paciente": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "id_procedimento": {
-                                        "type": "intenger",
-                                        "example": "14"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": 0
-                                    },
-                                    "num_guia_prestador": {
-                                        "type": "string",
-                                        "example": "GP001"
-                                    },
-                                    "num_guia_operadora": {
-                                        "type": "string",
-                                        "example": "GO001"
-                                    },
-                                    "data": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2024-03-29"
-                                    },
-                                    "quantidade": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "valor": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": 100
-                                    },
-                                    "tabela": {
-                                        "type": "string",
-                                        "example": "00"
-                                    },
-                                    "id_contratado_executante": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "codigo_operadora_contratado": {
-                                        "type": "string",
-                                        "example": "COD001"
-                                    },
-                                    "cnpj_contratado": {
-                                        "type": "string",
-                                        "example": "12345678901234"
-                                    },
-                                    "cnes_contratado": {
-                                        "type": "string",
-                                        "example": "CNES001"
-                                    },
-                                    "id_profissional_executante": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "codigo_operadora_profissional": {
-                                        "type": "string",
-                                        "example": "COD002"
-                                    },
-                                    "id_conselho": {
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "numero_conselho_profissional": {
-                                        "type": "string",
-                                        "example": "08"
-                                    },
-                                    "uf_conselho_profissional": {
-                                        "type": "string",
-                                        "example": 26
-                                    },
-                                    "cbo_s": {
-                                        "type": "string",
-                                        "example": "251510"
-                                    },
-                                    "tipo_consulta": {
-                                        "type": "string",
-                                        "example": "4"
-                                    },
-                                    "indicador_acidente": {
-                                        "type": "string",
-                                        "example": "9"
-                                    },
-                                    "cobertura_especial": {
-                                        "type": "string",
-                                        "example": "02"
-                                    },
-                                    "atendimento_regime": {
-                                        "type": "string",
-                                        "example": "01"
-                                    },
-                                    "observacao": {
-                                        "type": "string",
-                                        "example": "Observações adicionais"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Guia criado com sucesso"
-                    },
-                    "400": {
-                        "description": "Erro na requisição"
-                    },
-                    "401": {
-                        "description": "Não autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "422": {
-                        "description": "Erro de validação"
-                    }
-                }
-            }
-        },
-        "/guias/{id}": {
-            "get": {
-                "tags": [
-                    "Guias"
-                ],
-                "summary": "Buscar guia por ID",
-                "operationId": "getGuiaById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID do guia",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Guia não encontrado"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Guias"
-                ],
-                "summary": "Atualizar guia",
-                "operationId": "updateGuia",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID do guia",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Dados do guia a serem alterados. Verifique os campos no Schema",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "nome": {
-                                        "type": "string",
-                                        "example": "Guia Ilha do leite"
-                                    },
-                                    "endereco": {
-                                        "type": "string",
-                                        "example": "Av. Frei Matias Teves, 280 - Ilha do Leite, Recife - PE, 50070-465"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Guia não encontrado"
-                    },
-                    "422": {
-                        "description": "Erro de validação"
-                    },
-                    "500": {
-                        "description": "Erro interno do servidor"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Guias"
-                ],
-                "summary": "Excluir guia",
-                "operationId": "deleteGuia",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID do guia",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Guia excluído com sucesso"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Guia não encontrado"
-                    }
-                }
-            }
-        },
-        "/lotes": {
-            "get": {
-                "tags": [
-                    "Lotes"
-                ],
-                "summary": "Listar todos as lotes",
-                "operationId": "getLoteList",
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Lotes"
-                ],
-                "summary": "Cadastrar uma nova lote",
-                "description": "Cria um novo registro de lote com os dados fornecidos.",
-                "operationId": "storeLote",
-                "requestBody": {
-                    "description": "Dados da lote",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "id_convenio",
-                                    "numero",
-                                    "tipo",
-                                    "data",
-                                    "status",
-                                    "valor_total"
-                                ],
-                                "properties": {
-                                    "id_convenio": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    },
-                                    "numero": {
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "tipo": {
-                                        "type": "string",
-                                        "example": "Consulta"
-                                    },
-                                    "data": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2024-06-30"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "0"
-                                    },
-                                    "valor_total": {
-                                        "type": "number",
-                                        "format": "decimal",
-                                        "example": 100
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Lote criado com sucesso"
-                    },
-                    "400": {
-                        "description": "Erro na requisição"
-                    },
-                    "401": {
-                        "description": "Não autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "422": {
-                        "description": "Erro de validação"
-                    }
-                }
-            }
-        },
-        "/lotes/{id}": {
-            "get": {
-                "tags": [
-                    "Lotes"
-                ],
-                "summary": "Buscar lote por ID",
-                "operationId": "getLoteById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID do lote",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Lote não encontrado"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Lotes"
-                ],
-                "summary": "Atualizar lote",
-                "operationId": "updateLote",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID do lote",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Dados do lote a serem alterados. Verifique os campos no Schema",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "nome": {
-                                        "type": "string",
-                                        "example": "Lote Ilha do leite"
-                                    },
-                                    "endereco": {
-                                        "type": "string",
-                                        "example": "Av. Frei Matias Teves, 280 - Ilha do Leite, Recife - PE, 50070-465"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Lote não encontrado"
-                    },
-                    "422": {
-                        "description": "Erro de validação"
-                    },
-                    "500": {
-                        "description": "Erro interno do servidor"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Lotes"
-                ],
-                "summary": "Excluir lote",
-                "operationId": "deleteLote",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID do lote",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Lote excluído com sucesso"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Lote não encontrado"
-                    }
-                }
-            }
-        },
-        "/lotes/{idConvenio}/{numeroLote}/xml": {
-            "get": {
-                "tags": [
-                    "Lotes"
-                ],
-                "summary": "Gerar XML do lote de um convênio",
-                "operationId": "generateXML",
-                "parameters": [
-                    {
-                        "name": "idConvenio",
-                        "in": "path",
-                        "description": "ID do Convênio",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "numeroLote",
-                        "in": "path",
-                        "description": "Número do lote atrelado ao convênio",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Lote não encontrado"
-                    }
-                }
-            }
-        },
-        "/marcacoes": {
-            "get": {
-                "tags": [
-                    "Marcações"
-                ],
-                "summary": "Listar todas as marcações",
-                "operationId": "getMarcacaoList",
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Marcações"
-                ],
-                "summary": "Cadastrar uma nova marcação",
-                "description": "Cria um novo registro de marcação com os dados fornecidos.",
-                "operationId": "storeMarcacao",
-                "requestBody": {
-                    "description": "Dados do marcacao",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "id_paciente",
-                                    "id_funcionario",
-                                    "id_especialidade",
-                                    "convenio",
-                                    "duracao",
-                                    "horario",
-                                    "data_inicial",
-                                    "recorrencia",
-                                    "marcadoPor",
-                                    "unidade"
-                                ],
-                                "properties": {
-                                    "id_paciente": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "id_funcionario": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "id_especialidade": {
-                                        "type": "integer",
-                                        "example": 3
-                                    },
-                                    "convenio": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "duracao": {
-                                        "type": "integer",
-                                        "example": 60
-                                    },
-                                    "horario": {
-                                        "type": "string",
-                                        "format": "hour",
-                                        "example": "14:00:00"
-                                    },
-                                    "data_inicial": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2024-03-18"
-                                    },
-                                    "recorrencia": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "vezesRecorrencia": {
-                                        "type": "integer",
-                                        "example": 4
-                                    },
-                                    "marcadoPor": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "unidade": {
-                                        "type": "integer",
-                                        "example": 1
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Marcacao criado com sucesso"
-                    },
-                    "400": {
-                        "description": "Erro na requisição"
-                    },
-                    "401": {
-                        "description": "Não autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "422": {
-                        "description": "Erro de validação"
-                    }
-                }
-            }
-        },
-        "/marcacoes/{id}": {
-            "get": {
-                "tags": [
-                    "Marcações"
-                ],
-                "summary": "Buscar marcação por ID",
-                "operationId": "getMarcacaoById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da marcação",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Marcação não encontrado"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Marcações"
-                ],
-                "summary": "Atualizar marcação",
-                "operationId": "updateMarcacao",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da marcação",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Dados do marcacao a serem alterados. Verifique os campos no Schema",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "duraca": {
-                                        "type": "integer",
-                                        "example": "30"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Marcação não encontrado"
-                    },
-                    "422": {
-                        "description": "Erro de validação"
-                    },
-                    "500": {
-                        "description": "Erro interno do servidor"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Marcações"
-                ],
-                "summary": "Excluir marcação",
-                "operationId": "deleteMarcacao",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID da marcação",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Marcação excluído com sucesso"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Marcação não encontrado"
-                    }
-                }
-            }
-        },
-        "/marcacoes/{idMarcacao}/atendimentos": {
-            "get": {
-                "tags": [
-                    "Marcações",
-                    "Atendimentos"
-                ],
-                "summary": "Buscar atendimentos por marcação",
-                "operationId": "getMarcacaoAtendimentos",
-                "parameters": [
-                    {
-                        "name": "idMarcacao",
-                        "in": "path",
-                        "description": "ID da marcação",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Paciente não encontrado"
-                    }
-                }
-            }
-        },
-        "/marcacoes/{idMarcacao}/atendimentos/{idAtendimento}": {
-            "get": {
-                "tags": [
-                    "Marcações",
-                    "Atendimentos"
-                ],
-                "summary": "Buscar atendimento by id por marcação",
-                "operationId": "getMarcacaoAtendimentoById",
-                "parameters": [
-                    {
-                        "name": "idMarcacao",
-                        "in": "path",
-                        "description": "ID da marcação",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "idAtendimento",
-                        "in": "path",
-                        "description": "ID do atendimento",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Operação bem-sucedida"
-                    },
-                    "401": {
-                        "description": "Não Autenticado"
-                    },
-                    "403": {
-                        "description": "Proibido"
-                    },
-                    "404": {
-                        "description": "Paciente não encontrado"
                     }
                 }
             }
