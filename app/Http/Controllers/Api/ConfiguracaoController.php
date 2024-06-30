@@ -53,7 +53,7 @@ class ConfiguracaoController extends Controller
     *   @OA\Property(property="descricao", type="string", example="Descrição da Empresa"),
     *   @OA\Property(property="textoFooter", type="string", example="Texto do rodapé da Empresa"),
     *   @OA\Property(property="banner_app", type="string", example="data:@file/png;base64"),
-    *   @OA\Property(property="banner_site", type="string", example="data:@file/png;base64),
+    *   @OA\Property(property="banner_site", type="string", example="data:@file/png;base64"),
     *   @OA\Property(property="banner_site_mobile", type="string", example="data:@file/png;base64"),
     *   @OA\Property(property="segunda_sexta", type="boolean", example=true),
     *   @OA\Property(property="segunda_sexta_horario_inicio", type="string", example="08:00"),

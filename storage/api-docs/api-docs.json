@@ -544,7 +544,7 @@
                 }
             }
         },
-        "/configurações": {
+        "/configuracoes": {
             "get": {
                 "tags": [
                     "Configuraçoes"
@@ -562,9 +562,7 @@
                         "description": "Proibido"
                     }
                 }
-            }
-        },
-        "/configuracoes": {
+            },
             "post": {
                 "tags": [
                     "Configuraçoes"
@@ -581,7 +579,7 @@
                                 "properties": {
                                     "logo": {
                                         "type": "string",
-                                        "example": "url_to_logo.png"
+                                        "example": "data:@file/png;base64..."
                                     },
                                     "nome_empresa": {
                                         "type": "string",
@@ -605,15 +603,15 @@
                                     },
                                     "banner_app": {
                                         "type": "string",
-                                        "example": "url_to_banner_app.png"
+                                        "example": "data:@file/png;base64"
                                     },
                                     "banner_site": {
                                         "type": "string",
-                                        "example": "url_to_banner_site.png"
+                                        "example": "data:@file/png;base64"
                                     },
                                     "banner_site_mobile": {
                                         "type": "string",
-                                        "example": "url_to_banner_site_mobile.png"
+                                        "example": "data:@file/png;base64"
                                     },
                                     "segunda_sexta": {
                                         "type": "boolean",
